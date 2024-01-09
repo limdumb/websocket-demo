@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { FriendsService } from './friends.module';
+import { FriendsService } from './friends.service';
 
 export class CreateFriendsDto {
   id: number;
-  name: string;
+  nickName: string;
   imageURL: string;
 }
 
