@@ -5,6 +5,7 @@ export class CreateFriendsDto {
   id: number;
   nickName: string;
   imageURL: string;
+  friendStatus: boolean;
 }
 
 @Controller('friend')
