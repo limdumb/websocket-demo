@@ -13,7 +13,9 @@ export class ProfileService {
   ];
 
   getProfile(id: number): CreateProfileDto {
-    if (typeof id !== 'string') throw new Error('잘못된 접근입니다.');
+    if (this.profile.some((item) => item.id !== id)) {
+      throw new Error('ID does not exist.');
+    }
 
     const result = this.profile.filter((el) => {
       return id === el.id;
