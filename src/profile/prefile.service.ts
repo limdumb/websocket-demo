@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateProfileDto } from './profile.controller';
 
 @Injectable()
@@ -14,7 +14,16 @@ export class ProfileService {
 
   getProfile(id: number): CreateProfileDto {
     if (this.profile.some((item) => item.id !== id)) {
-      throw new Error('ID does not exist.');
+      throw new HttpException(
+        {
+          status: HttpStatus.NOT_FOUND,
+          error: '해당하는 유저가 존재하지 않습니다.',
+        },
+        HttpStatus.NOT_FOUND,
+        {
+          cause: '해당하는 유저가 존재하지 않습니다.',
+        },
+      );
     }
 
     const result = this.profile.filter((el) => {
