@@ -15,11 +15,11 @@ export class PostService {
       comments: [
         {
           user: {
-            id: 5,
-            nickName: '@kiki_kiki',
-            imageUrl: '이미지에용',
+            id: 1,
+            nickName: '@gogogo',
+            imageUrl: '이미지에요',
           },
-          contents: '사진 너무 잘 찍으셨네요 멋있쩌용!',
+          contents: '너무이쁘네요!',
         },
       ],
     },

@@ -1,20 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFriendsDto } from './friends.controller';
 
+export class AllFriendsDto {
+  id: string;
+  friends: CreateFriendsDto[];
+}
+
 @Injectable()
 export class FriendsService {
-  /*
-      1. 휘발성
-      2. 서버를 여러개를 띄울때는 다른서버에는 값이없음
-  */
-  private readonly friends: CreateFriendsDto[] = [];
+  private readonly friends: AllFriendsDto[] = [];
 
-  getFriends(): CreateFriendsDto[] {
-    return this.friends;
+  getFriends(id: string): CreateFriendsDto[] {
+    const response = this.friends.filter((el) => {
+      return id === el.id;
+    });
+
+    return response[0].friends;
   }
 
-  postFriends(data: CreateFriendsDto): string {
-    this.friends.push(data);
+  postFriends(data: CreateFriendsDto, id: string): string {
+    const response = this.friends.filter((el) => {
+      return id === el.id;
+    });
+
+    response[0].friends.push(data);
     return 'success';
   }
 }

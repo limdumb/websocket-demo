@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { FriendsService } from './friends.service';
 
 export class CreateFriendsDto {
@@ -7,19 +7,21 @@ export class CreateFriendsDto {
   imageURL: string;
   friendStatus: boolean;
 }
+// id값을 받아야 Friends에 request가 가능함
+// + id값을 받아야 누구의 Friends List인지 확인이 가능함
 
-@Controller('friend')
+@Controller('friends')
 export class FriendController {
   constructor(private readonly friendsService: FriendsService) {}
 
   @Get()
-  getFriends(): CreateFriendsDto[] {
-    return this.friendsService.getFriends();
+  getFriends(@Param('id') id: string): CreateFriendsDto[] {
+    return this.friendsService.getFriends(id);
   }
 
   @Post()
-  create(@Body() dto: CreateFriendsDto) {
-    const result = this.friendsService.postFriends(dto);
+  create(@Body() dto: CreateFriendsDto, @Param('id') id: string) {
+    const result = this.friendsService.postFriends(dto, id);
 
     return result;
   }
