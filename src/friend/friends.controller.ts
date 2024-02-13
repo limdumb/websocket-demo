@@ -14,12 +14,12 @@ export class CreateFriendsDto {
 export class FriendController {
   constructor(private readonly friendsService: FriendsService) {}
 
-  @Get()
+  @Get(':id')
   getFriends(@Param('id') id: string): CreateFriendsDto[] {
     return this.friendsService.getFriends(id);
   }
 
-  @Post()
+  @Post(':id')
   create(@Body() dto: CreateFriendsDto, @Param('id') id: string) {
     const result = this.friendsService.postFriends(dto, id);
 
